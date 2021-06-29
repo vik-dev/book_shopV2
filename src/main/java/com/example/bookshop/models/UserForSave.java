@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class UserForSave {
     private double money;
     private String name;
+    private String password;
 
     public User convertToUser(){
         var user = new User();

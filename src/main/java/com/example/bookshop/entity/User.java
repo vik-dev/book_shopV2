@@ -1,15 +1,13 @@
 package com.example.bookshop.entity;
 
 
+import com.example.bookshop.enums.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -27,4 +25,12 @@ public class User {
     @Column(unique = true, nullable = false)
     private String name;
 
+    @Column(unique = true)
+    private String password;
+
+    @Column(unique = true, nullable = false)
+    private String login;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 }

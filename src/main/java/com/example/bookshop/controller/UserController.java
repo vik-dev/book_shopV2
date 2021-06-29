@@ -9,6 +9,7 @@ import com.example.bookshop.models.UserForSave;
 import com.example.bookshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +22,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/create")
     public ResponseEntity<ResultMessage> createUser(@RequestBody UserForSave userForSave) throws UserException {
-        userService.addUser(userForSave.convertToUser());
+        var user = userForSave.convertToUser();
+        user.setPassword(passwordEncoder.encode(userForSave.getPassword()));
+        userService.addUser(user);
         return ResponseEntity.ok(new ResultMessage());
     }
 
