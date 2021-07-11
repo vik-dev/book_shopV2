@@ -1,6 +1,7 @@
 package com.example.bookshop.security;
 
 import com.example.bookshop.entity.User;
+import com.example.bookshop.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -56,6 +57,6 @@ public class SecurityUser implements UserDetails {
     }
 
     public static SecurityUser convertFromUser(User user){
-        return new SecurityUser(user.getLogin(), user.getPassword(), user.getRole().getAuthorities(), true);
+        return new SecurityUser(user.getLogin(), user.getPassword(), user.getRole() == null ? Role.USER.getAuthorities() : user.getRole().getAuthorities(), true);
     }
 }

@@ -11,12 +11,14 @@ import lombok.NoArgsConstructor;
 public class UserForSave {
     private double money;
     private String name;
+    private String login;
     private String password;
 
     public User convertToUser(){
         var user = new User();
         user.setName(this.getName());
         user.setMoney(this.getMoney());
+        user.setLogin(this.getLogin());
         return user;
     }
 }
